@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-ink-950 text-cream font-sans antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(240, 169, 63, 0.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(59, 130, 246, 0.05), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-gold-500/30 text-cream;
+  }
+}
+
+/* ---- barber pole ---- */
+.barber-pole {
+  background: repeating-linear-gradient(
+    -45deg,
+    #e14b5a 0 10px,
+    #f4ede1 10px 20px,
+    #3b82f6 20px 30px,
+    #f4ede1 30px 40px
+  );
+  background-size: 100% 56.57px; /* 40px / sin(45deg) so stripes loop seamlessly */
+  animation: poleSlide 2.6s linear infinite;
+}
+
+/* ---- scrollbars ---- */
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 8px; border: 2px solid #0c0f14; }
+*::-webkit-scrollbar-thumb:hover { background: #41506a; }
+
+/* ---- skeleton shimmer ---- */
+.skeleton {
+  @apply rounded-lg bg-ink-750;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+  background-size: 500px 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ---- leaflet dark theme ---- */
+.leaflet-container {
+  background: #0c0f14;
+  font-family: Inter, system-ui, sans-serif;
+  border-radius: 1rem;
+}
+.leaflet-dark-tiles {
+  filter: brightness(0.75) invert(1) contrast(2.4) hue-rotate(190deg) saturate(0.35) brightness(0.92);
+}
+.leaflet-popup-content-wrapper {
+  background: #151b24;
+  color: #f4ede1;
+  border: 1px solid #232c3b;
+  border-radius: 12px;
+  box-shadow: 0 16px 50px -12px rgba(0,0,0,0.7);
+}
+.leaflet-popup-tip { background: #151b24; border: 1px solid #232c3b; }
+.leaflet-popup-content { margin: 10px 14px; line-height: 1.45; }
+.leaflet-container a.leaflet-popup-close-button { color: #8b96a9; }
+.leaflet-bar { border: none !important; }
+.leaflet-bar a { background: #1a212d !important; color: #f4ede1 !important; border-color: #232c3b !important; }
+.leaflet-bar a:hover { background: #232c3b !important; }
+
+.map-dot {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  font-size: 15px;
+}
+.map-dot.free { background: #2fce70; animation: ringPulse 2s ease-out infinite; }
+.map-dot.busy { background: #f0a93f; }
+.map-dot.closed { background: #5b6577; }
+.map-dot.me { background: #3b82f6; }
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl bg-ink-850 border border-ink-700 px-3.5 py-2.5 text-sm text-cream placeholder-muted-dark
+      outline-none transition focus:border-gold-500/60 focus:ring-2 focus:ring-gold-500/20;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-muted mb-1.5;
+  }
+  .card {
+    @apply rounded-2xl border border-ink-700/70 bg-ink-900/80 shadow-card backdrop-blur;
+  }
+  .th {
+    @apply text-left text-[11px] font-semibold uppercase tracking-wider text-muted px-3 py-2 whitespace-nowrap;
+  }
+  .td {
+    @apply px-3 py-3 text-sm border-t border-ink-800;
+  }
+}
